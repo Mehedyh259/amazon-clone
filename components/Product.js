@@ -6,12 +6,12 @@ import { addToBasket } from '../slices/basketSlice';
 
 
 const Product = ({ product }) => {
-    const { id, title, price, description, category, image } = product;
+    const { id, title, price, rating, description, category, image } = product;
     const MAX_RATING = 5;
     const MIN_RATING = 1;
-    const [rating] = useState(
-        Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
-    )
+    // const [rating] = useState(
+    //     Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
+    // )
     const dispatch = useDispatch()
 
     const [hasPrime] = useState(Math.random() < 0.5);
@@ -25,11 +25,12 @@ const Product = ({ product }) => {
         <div className='relative flex flex-col m-5 bg-white z-30 p-10 rounded'>
             <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 
-            <Image src={image} height={200} width={200} objectFit="contain" />
+            <Image src={image} height={200} width={200} objectFit="contain" alt='' />
             <h4 className='my-3'>{title}</h4>
             <div className='flex'>
+                <small>Rating({rating.rate}): </small>
                 {
-                    Array(rating).fill().map((_, index) => {
+                    Array(Math.round(rating.rate)).fill().map((_, index) => {
                         return <StarIcon key={index} className='h-5 text-yellow-400' />
                     })
                 }
@@ -46,7 +47,7 @@ const Product = ({ product }) => {
                     </div>
                 )
             }
-            <button className='mt-auto button'>Add to Basket</button>
+            <button onClick={addItemToBasket} className='mt-auto button'>Add to Basket</button>
         </div>
     );
 };

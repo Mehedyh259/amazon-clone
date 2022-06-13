@@ -22,7 +22,7 @@ export default function Home({ products }) {
 
       </main>
 
-    
+
 
     </div>
   );
@@ -37,4 +37,4 @@ export const getServerSideProps = async (context) => {
       products: products
     }
   }
-} 
+}
